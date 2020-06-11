@@ -6,6 +6,12 @@
             "type": "string",
             "defaultValue": "nsg-default1"
         },
+		"virtualNetworkRG": {
+			"type": "string",
+			"metadata": {
+				"description": "Name of the Virtual Network Resource Group"
+			}
+		},        
         "virtualNetworkName": {
             "type": "string",
             "defaultValue": "vnet-FW",
@@ -99,7 +105,7 @@
         "location": "[resourceGroup().location]",
         "rgname": "[resourceGroup().id]",
         "vnetname": "[parameters('virtualNetworkName')]",
-        "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('vnetname'))]",
+        "vnetID": "[resourceId(parameters('virtualNetworkRG'), 'Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]",
         "subnet0Ref": "[concat(variables('vnetID'),'/subnets/',parameters('subnet0Name'))]",
         "subnet1Ref": "[concat(variables('vnetID'),'/subnets/',parameters('subnet1Name'))]",
         "subnet2Ref": "[concat(variables('vnetID'),'/subnets/',parameters('subnet2Name'))]",
