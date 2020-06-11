@@ -116,7 +116,7 @@
                 "properties": {
                     "addressPrefix": "[if(equals(parameters('subnet0Prefix'), 'None'), json('null'), parameters('subnet0Prefix'))]",
                     "networkSecurityGroup": {
-                            "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
+                            "id": "[resourceId(parameters('virtualNetworkRG'),'Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
                     }
                 }
             },
@@ -171,7 +171,7 @@
             "properties": {
                 "addressPrefix": "[if(equals(parameters('subnet0Prefix'), 'None'), json('null'), parameters('subnet0Prefix'))]",
                 "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
+                    "id": "[resourceId(parameters('virtualNetworkRG'),'Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
                 }
             }
         },
@@ -185,7 +185,7 @@
                 "addressPrefix": "[if(equals(parameters('subnet1Prefix'), 'None'), json('null'), parameters('subnet1Prefix'))]"
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetname'), parameters('subnet0Name'))]"
+                "[resourceId(parameters('virtualNetworkRG'),'Microsoft.Network/virtualNetworks/subnets', variables('vnetname'), parameters('subnet0Name'))]"
             ]
         },
         {
@@ -198,7 +198,7 @@
                 "addressPrefix": "[if(equals(parameters('subnet1Prefix'), 'None'), json('null'), parameters('subnet2Prefix'))]"
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetname'), parameters('subnet1Name'))]"
+                "[resourceId(parameters('virtualNetworkRG'), 'Microsoft.Network/virtualNetworks/subnets', variables('vnetname'), parameters('subnet1Name'))]"
             ]
         }
     ],
