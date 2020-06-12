@@ -15,7 +15,13 @@
             "metadata": {
                 "description": "Public Load Balancer IP Name"
             } 
-        },    
+        }, 
+		"virtualNetworkRG": {
+			"type": "string",
+			"metadata": {
+				"description": "Name of the Virtual Network Resource Group"
+			}
+		},            
         "vnetName": {
             "type": "string",
             "defaultValue": "myVNET",
@@ -58,7 +64,7 @@
     },
     "variables": {
         "applicationGatewayName": "[parameters('lbName')]",
-        "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('vnetName'))]",
+        "vnetID": "[resourceId(parameters('virtualNetworkRG'), 'Microsoft.Network/virtualNetworks',parameters('vnetName'))]",
         "subnetRef": "[concat(variables('vnetID'),'/subnets/',parameters('subnetName'))]",
         "publicIPRef": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('publicIPAddressName'))]",
         "applicationGatewayID": "[resourceId('Microsoft.Network/applicationGateways',variables('applicationGatewayName'))]",
