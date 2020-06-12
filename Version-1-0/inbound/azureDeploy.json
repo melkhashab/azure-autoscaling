@@ -425,7 +425,7 @@
         {   "condition": "[equals(parameters('deployIntoExistingVnet'), 'No')]",
             "name": "SetupPublicLoadBalancer",
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2015-01-01",
+            "apiVersion": "2019-08-01",
             "dependsOn": [
                 "Microsoft.Resources/deployments/SetupVNET"
             ],
@@ -477,7 +477,7 @@
                             "privateIPAddress": "[parameters('fwLoadBalancerIP')]",
                             "privateIPAllocationMethod": "Static",
                             "subnet": {
-                                "id": "[resourceId(parameters('virtualNetworkRG'),'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), variables('untrustedSubnetName'))]"
+                                "id": "[resourceId(parameters('virtualNetworkRG'), 'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), variables('untrustedSubnetName'))]"
                             }
                         }
                     }

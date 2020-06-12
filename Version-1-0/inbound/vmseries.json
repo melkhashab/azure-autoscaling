@@ -90,6 +90,12 @@
                 "description": "Credentials required by the firewall VM bootstrap code to access the storage"
             }
         },
+		"virtualNetworkRG": {
+			"type": "string",
+			"metadata": {
+				"description": "Name of the Virtual Network Resource Group"
+			}
+		},         
         "virtualNetworkName": {
             "type": "string",
             "metadata": {
@@ -280,7 +286,7 @@
                                     "name": "[variables('ipConfigNamemgmt')]",
                                     "properties": {
                                         "subnet": {
-                                            "id": "[concat('/subscriptions/', subscription().subscriptionId,'/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'), '/subnets/', parameters('subnetNameMgmt'))]"
+                                            "id": "[concat('/subscriptions/', subscription().subscriptionId,'/resourceGroups/', parameters('virtualNetworkRG'), '/providers/Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'), '/subnets/', parameters('subnetNameMgmt'))]"
                                         },
                                         "publicIPAddressConfiguration": {
                                             "name": "pavm_pip",
@@ -302,11 +308,11 @@
                                     "name": "[variables('ipConfigNameuntrust')]",
                                     "properties": {
                                         "subnet": {
-                                            "id": "[concat('/subscriptions/', subscription().subscriptionId,'/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'), '/subnets/', parameters('subnetNameUntrust'))]"
+                                            "id": "[concat('/subscriptions/', subscription().subscriptionId,'/resourceGroups/', parameters('virtualNetworkRG'), '/providers/Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'), '/subnets/', parameters('subnetNameUntrust'))]"
                                         },
                                         "loadBalancerBackendAddressPools": [
                                         {
-                                            "id": "[concat('/subscriptions/', subscription().subscriptionId,'/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Network/loadBalancers/', parameters('fwLbName'), '/backendAddressPools/', parameters('fwLbBePoolName'))]"
+                                            "id": "[concat('/subscriptions/', subscription().subscriptionId,'/resourceGroups/', parameters('virtualNetworkRG'), '/providers/Microsoft.Network/loadBalancers/', parameters('fwLbName'), '/backendAddressPools/', parameters('fwLbBePoolName'))]"
                                         }]
                                     }
                                 }]
@@ -322,7 +328,7 @@
                                     "name": "[variables('ipConfigNametrust')]",
                                     "properties": {
                                         "subnet": {
-                                            "id": "[concat('/subscriptions/', subscription().subscriptionId,'/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'), '/subnets/', parameters('subnetNameTrust'))]"
+                                            "id": "[concat('/subscriptions/', subscription().subscriptionId,'/resourceGroups/', parameters('virtualNetworkRG'), '/providers/Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'), '/subnets/', parameters('subnetNameTrust'))]"
                                         }
                                     }
                                 }]
