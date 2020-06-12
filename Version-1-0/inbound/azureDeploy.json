@@ -532,7 +532,7 @@
         {
             "name": "SetupVMSeries",
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2015-01-01",
+            "apiVersion": "2019-08-01",
             "dependsOn": [
                 "Microsoft.Resources/deployments/SetupVNET",
                 "Microsoft.Resources/deployments/SetupPublicLoadBalancer"
@@ -571,6 +571,9 @@
                     "customDataField": {
                         "value": "[variables('customDataField')]"
                     },
+                    "virtualNetworkRG": {
+                        "value": "[parameters('virtualNetworkRG')]"
+                    },  
                     "virtualNetworkName": {
                          "value": "[parameters('virtualNetworkName')]"
                     },
