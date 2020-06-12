@@ -359,7 +359,6 @@
             "name": "SetupVNET",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2015-01-01",
-            "location": "[parameters('virtualNetworkRG').location]",
             "dependsOn": [
                 "Microsoft.Resources/deployments/SetupNSG",
                 "Microsoft.Resources/deployments/SetupDefaultUDR"
