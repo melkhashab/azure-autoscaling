@@ -308,7 +308,9 @@
         {
             "name": "SetupNSG",
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2015-01-01",
+            "apiVersion": "2019-08-01",
+            "subscriptionId": "[subscription().subscriptionId]",
+            "resourceGroup": "[parameters('virtualNetworkRG')]",
             "dependsOn": [
                 "Microsoft.Resources/deployments/PublishCustomMetrics"
             ],
@@ -338,7 +340,9 @@
             "condition": "[equals(parameters('deployIntoExistingVnet'), 'No')]",
             "name": "SetupDefaultUDR",
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2015-01-01",
+            "apiVersion": "2019-08-01",
+            "subscriptionId": "[subscription().subscriptionId]",
+            "resourceGroup": "[parameters('virtualNetworkRG')]",
             "dependsOn": [
                 "Microsoft.Resources/deployments/SetupNSG"
             ],
@@ -358,7 +362,9 @@
         {
             "name": "SetupVNET",
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2015-01-01",
+            "apiVersion": "2019-08-01",
+            "subscriptionId": "[subscription().subscriptionId]",
+            "resourceGroup": "[parameters('virtualNetworkRG')]",
             "dependsOn": [
                 "Microsoft.Resources/deployments/SetupNSG",
                 "Microsoft.Resources/deployments/SetupDefaultUDR"
@@ -414,6 +420,7 @@
                     }
                 }
             }
+            
         },
         {   "condition": "[equals(parameters('deployIntoExistingVnet'), 'No')]",
             "name": "SetupPublicLoadBalancer",
@@ -470,7 +477,7 @@
                             "privateIPAddress": "[parameters('fwLoadBalancerIP')]",
                             "privateIPAllocationMethod": "Static",
                             "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), variables('untrustedSubnetName'))]"
+                                "id": "[resourceId(parameters('virtualNetworkRG'),'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), variables('untrustedSubnetName'))]"
                             }
                         }
                     }

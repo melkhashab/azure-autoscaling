@@ -168,6 +168,7 @@
             "type": "Microsoft.Network/virtualNetworks/subnets",
             "name": "[concat(variables('vnetname'), '/', parameters('subnet0Name'))]",
             "location": "[variables('location')]",
+            
             "properties": {
                 "addressPrefix": "[if(equals(parameters('subnet0Prefix'), 'None'), json('null'), parameters('subnet0Prefix'))]",
                 "networkSecurityGroup": {
