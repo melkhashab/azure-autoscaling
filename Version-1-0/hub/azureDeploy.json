@@ -13,6 +13,13 @@
                  "description": "If yes, then the template will deploy just the VM-Series firewall and not the app-gw."
              }
         },
+        "virtualNetworkRG": {
+            "type": "string",
+            "defaultValue": "rg-networking-prod-001",
+            "metadata": {
+                "description": "Name of resource group of EXISTING VNET"
+            }
+        },       
         "virtualNetworkName": {
             "type": "string",
             "defaultValue": "hub-vnet",
@@ -285,7 +292,9 @@
         {    
             "name": "deployNsg",
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2015-01-01",
+            "apiVersion": "2019-08-01",
+            "subscriptionId": "[subscription().subscriptionId]",
+            "resourceGroup": "[parameters('virtualNetworkRG')]",
             "dependsOn": [
             ],
             "properties": {
@@ -313,7 +322,9 @@
         {
             "name": "deployVnet",
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2015-01-01",
+            "apiVersion": "2019-08-01",
+            "subscriptionId": "[subscription().subscriptionId]",
+            "resourceGroup": "[parameters('virtualNetworkRG')]",
             "dependsOn": [
                 "Microsoft.Resources/deployments/deployNsg"
             ],
@@ -326,6 +337,9 @@
                 "parameters": {
                     "nsgName": {
                         "value": "[reference('deployNsg').outputs.MgmtSubnetNsgName.value]"
+                    },
+                    "virtualNetworkRG": {
+                        "value": "[parameters('virtualNetworkRG')]"
                     },
                     "virtualNetworkName": {
                         "value": "[parameters('virtualNetworkName')]"
@@ -378,7 +392,7 @@
                         "value": "[variables('location')]"
                     },
                     "virtualNetworkRG": {
-                        "value": "[variables('rgName')]"
+                        "value": "[parameters('virtualNetworkRG')]"
                     },
                     "virtualNetworkName": {
                         "value": "[parameters('virtualNetworkName')]"
@@ -439,6 +453,9 @@
                     },
                     "customDataField": {
                         "value": "[variables('customDataField')]"
+                    },
+                    "virtualNetworkRG": {
+                        "value": "[parameters('virtualNetworkRG')]"
                     },
                     "virtualNetworkName": {
                          "value": "[parameters('virtualNetworkName')]"

@@ -6,6 +6,12 @@
 			"type": "string",
 			"defaultValue": "nsg-default1"
 		},
+        "virtualNetworkRG": {
+            "type": "string",
+            "defaultValue": "rg-networking-prod-001",
+            "metadata": {
+                "description": "Name of resource group of EXISTING VNET"
+            },		
 		"virtualNetworkName": {
 			"type": "string",
 			"defaultValue": "vnet",
