@@ -61,6 +61,12 @@
                         "description": "CIDR for Management Subnet."
                     }
             },
+        "VNETsubnetNameMgmt": {
+            "type": "string",
+            "metadata": {
+                "description": "Management Subnet name"
+            }
+        },
         "untrustSubnetPrefix": {
             "type": "string",
             "defaultValue": "192.168.1.0/24",
@@ -68,6 +74,12 @@
                 "description": "CIDR for Untrust Subnet."
             }
         },
+        "VNETsubnetNameuntrust": {
+            "type": "string",
+            "metadata": {
+                "description": "Management Subnet name"
+            }
+        },        
         "trustSubnetPrefix": {
             "type": "string",
             "defaultValue": "192.168.2.0/24",
@@ -75,6 +87,12 @@
                 "description": "CIDR for Trust Subnet."
             }
         },
+        "VNETsubnetNametrust": {
+            "type": "string",
+            "metadata": {
+                "description": "Management Subnet name"
+            }
+        },         
         "appGatewaySubnetPrefix": {
             "type": "string",
             "defaultValue": "192.168.3.0/24",
@@ -82,6 +100,12 @@
                 "description": "CIDR for the App Gateway Subnet."
             }
         },
+        "VNETsubnetNameappGateway": {
+            "type": "string",
+            "metadata": {
+                "description": "Management Subnet name"
+            }
+        },         
         "vmSeriesFirewallModel": {
              "type": "string",
              "defaultValue": "byol",
@@ -224,10 +248,10 @@
         "namingInfix": "[substring(uniqueString(resourceGroup().id), 0, 5)]",
         "rgname" : "[resourceGroup().name]",
         "networkSecurityGroupName" : "[concat(variables('rgname'), '-mgmt-nsg-', variables('namingInfix'))]",
-        "MgmtSubnetName" : "[concat(parameters('virtualNetworkName'), '-mgmt-subnet')]",
-        "untrustedSubnetName" : "[concat(parameters('virtualNetworkName'), '-untrust-subnet')]",
-        "trustedSubnetName" : "[concat(parameters('virtualNetworkName'), '-trust-subnet')]",
-        "appGatewaySubnetName" : "[concat(parameters('virtualNetworkName'), '-appgw-subnet')]",
+        "MgmtSubnetName" : "[parameters('VNETsubnetNameMgmt')]",
+        "untrustedSubnetName" : "[parameters('VNETsubnetNameuntrust')]",
+        "trustedSubnetName" : "[parameters('VNETsubnetNametrust')]",
+        "appGatewaySubnetName" : "[parameters('VNETsubnetNameappGateway')]",
         "LoadBalancerType" : "layer-7",
         "firewallVmCount" : 2,
         "baseUrl" : "https://raw.githubusercontent.com/melkhashab/azure-autoscaling/master/Version-1-0/inbound",

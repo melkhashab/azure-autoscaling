@@ -90,6 +90,12 @@
                 "description": "Credentials required by the firewall VM bootstrap code to access the storage"
             }
         },
+		"virtualNetworkRG": {
+			"type": "string",
+			"metadata": {
+				"description": "Name of the Virtual Network Resource Group"
+			}
+		},        
         "virtualNetworkName": {
             "type": "string",
             "metadata": {
