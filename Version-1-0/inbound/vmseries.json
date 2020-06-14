@@ -270,7 +270,7 @@
                         }
                     },
                     "osProfile": {
-                        "computerNamePrefix": "[concat('pavm', variables('namingInfix'))]",
+                        "computerNamePrefix": "[concat('emrpaifw', variables('namingInfix'))]",
                         "adminUsername": "[parameters('adminUsername')]",
                         "adminPassword": "[parameters('adminPassword')]",
                         "customData": "[base64(parameters('customDataField'))]"
@@ -287,12 +287,6 @@
                                     "properties": {
                                         "subnet": {
                                             "id": "[concat('/subscriptions/', subscription().subscriptionId,'/resourceGroups/', parameters('virtualNetworkRG'), '/providers/Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'), '/subnets/', parameters('subnetNameMgmt'))]"
-                                        },
-                                        "publicIPAddressConfiguration": {
-                                            "name": "pavm_pip",
-                                            "properties": {
-                                                "idleTimeoutInMinutes": 15
-                                            }
                                         }
                                     }
                                 }]
